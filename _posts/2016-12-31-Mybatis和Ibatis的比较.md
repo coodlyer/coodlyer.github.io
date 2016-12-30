@@ -26,16 +26,13 @@ tags : [Java]
 annotation的配置方式，不过这样做功能有限且侵入性过强，并不建议使用。
 
 2.  xml中一些细节的变动。例如：
-
-
   - ibatis中的parameterClass在mybatis中换成了parameterType。
   - ibatis中的dynamic标签不能使用了，而在mybatis中对动态sql有更好的支持，出现了诸如 if，chooose，when，trim
   where，set等标签，可以更加智能的构建和处理动态sql语句。
   - 变量申明发生了变化。在ibatis中通常是#id:VARCHAR#，而在mybatis中则需要改变为#{id，jdbcType=VARCHAR}这样。
   - ibatis使用SqlMapClient引入java api，而mybatis使用SQlSessionFactory。
   - mybatis在配置文件和映射文件上与ibatis有着比较大的区别，在命名上也更靠近jpa等规范，可以参考[博客](http://wenku.baidu.com/link?url=Qg4xACoYfcfvOqzLzPWYPmU-R2lDoETJFfxk-HQnHBZ-U3Llmp2zxZ51_QXhC-HbMHVzNWBT98Etx-lljv2UH55OQasAdfUl8ICzF_Rik83)
-    
-
+  
 3.  ibatis主要是采用嵌套查询的方式将对象之间的关系通过查询语句直接拼装起来，不过这样会造成“N+1”问题。简单的说就是通过一次查询查询到结果列表即1，然后在对列表中的每一条
 结果再进行一次查询即N。这种嵌套查询的方式一次查询就可能消耗大量的计算资源。而Mybatis则在支持嵌套查询的基础上还支持嵌套结果，两者在结果上是一致的。嵌套结果，可以
 直接通过一句sql将查询到的dto对象自动封装成所需的对象。在resultMap中通过collection来配置。
